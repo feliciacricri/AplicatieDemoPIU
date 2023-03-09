@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvidentaStudenti_Consola", "EvidentaStudenti_Consola\EvidentaStudenti_Consola.csproj", "{DD43BD77-F722-4F8F-A4B0-D7FDBD73B02F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibrarieModele", "LibrarieModele\LibrarieModele.csproj", "{F1211EC3-AA38-43F2-AB19-D0549CA25F03}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DD43BD77-F722-4F8F-A4B0-D7FDBD73B02F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD43BD77-F722-4F8F-A4B0-D7FDBD73B02F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD43BD77-F722-4F8F-A4B0-D7FDBD73B02F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD43BD77-F722-4F8F-A4B0-D7FDBD73B02F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1211EC3-AA38-43F2-AB19-D0549CA25F03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1211EC3-AA38-43F2-AB19-D0549CA25F03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1211EC3-AA38-43F2-AB19-D0549CA25F03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1211EC3-AA38-43F2-AB19-D0549CA25F03}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4C155BF6-A082-4BF8-88E0-8822EF2504EB}
+	EndGlobalSection
+EndGlobal
