@@ -75,5 +75,10 @@ namespace LibrarieModele
         {
             return prenume;
         }
+
+        public void SetIdStudent(int idStudent)
+        {
+            this.idStudent = idStudent;
+        }
     }
 }

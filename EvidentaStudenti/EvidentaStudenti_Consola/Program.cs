@@ -13,12 +13,15 @@ namespace EvidentaStudenti_Consola
             string numeFisier = ConfigurationManager.AppSettings["NumeFisier"];
             AdministrareStudenti_FisierText adminStudenti = new AdministrareStudenti_FisierText(numeFisier);
             int nrStudenti = 0;
+            // acest apel ajuta la obtinerea numarului de studenti inca de la inceputul executiei
+            // astfel incat o eventuala adaugare sa atribuie un IdStudent corect noului student
+            adminStudenti.GetStudenti(out nrStudenti);
 
             string optiune;
             do
             {
                 Console.WriteLine("I. Introducere informatii student");
-                Console.WriteLine("A. Afisare studenti");
+                Console.WriteLine("A. Afisarea ultimului student introdus");
                 Console.WriteLine("F. Afisare studenti din fisier");
                 Console.WriteLine("S. Salvare student in fisier");
                 Console.WriteLine("X. Inchidere program");
@@ -27,19 +30,11 @@ namespace EvidentaStudenti_Consola
                 switch (optiune.ToUpper())
                 {
                     case "I":
-                        int idStudent = nrStudenti + 1;
-
-                        Console.WriteLine("Introdu numele studentului {0} : ", idStudent);
-                        string nume = Console.ReadLine();
-                        Console.WriteLine("Introdu prenumele studentului {0} : ", idStudent);
-                        string prenume = Console.ReadLine();
-                        student = new Student(idStudent, nume, prenume);
-                        nrStudenti++;
+                        student = CitireStudentTastatura();
 
                         break;
                     case "A":
-                        string infoStudent = student.Info();
-                        Console.WriteLine("Studentul {0}", infoStudent);
+                        AfisareStudent(student);
 
                         break;
                     case "F":
@@ -48,11 +43,12 @@ namespace EvidentaStudenti_Consola
 
                         break;
                     case "S":
-                        idStudent = nrStudenti + 1;
-                        nrStudenti++;
-                        student = new Student(idStudent, "Ioana", "Radu");
+                        int idStudent = nrStudenti + 1;
+                        student.SetIdStudent(idStudent);
                         //adaugare student in fisier
                         adminStudenti.AddStudent(student);
+
+                        nrStudenti = nrStudenti + 1;
 
                         break;
                     case "X":
@@ -68,18 +64,36 @@ namespace EvidentaStudenti_Consola
             Console.ReadKey();
         }
 
+        public static void AfisareStudent(Student student)
+        {
+            string infoStudent = string.Format("Studentul cu id-ul #{0} are numele: {1} {2}",
+                   student.GetIdStudent(),
+                   student.GetNume() ?? " NECUNOSCUT ",
+                   student.GetPrenume() ?? " NECUNOSCUT ");
+
+            Console.WriteLine(infoStudent);
+        }
+
         public static void AfisareStudenti(Student[] studenti, int nrStudenti)
         {
             Console.WriteLine("Studentii sunt:");
             for (int contor = 0; contor < nrStudenti; contor++)
             {
-                string infoStudent = string.Format("Studentul cu id-ul #{0} are numele: {1} {2}",
-                   studenti[contor].GetIdStudent(),
-                   studenti[contor].GetNume() ?? " NECUNOSCUT ",
-                   studenti[contor].GetPrenume() ?? " NECUNOSCUT ");
-
-                Console.WriteLine(infoStudent);
+                AfisareStudent(studenti[contor]);
             }
+        }
+
+        public static Student CitireStudentTastatura()
+        {
+            Console.WriteLine("Introduceti numele");
+            string nume = Console.ReadLine();
+
+            Console.WriteLine("Introduceti prenumele");
+            string prenume = Console.ReadLine();
+
+            Student student = new Student(0, nume, prenume);
+
+            return student;
         }
     }
 }
