@@ -44,7 +44,7 @@ namespace EvidentaStudenti_Consola
                         break;
                     case "S":
                         int idStudent = nrStudenti + 1;
-                        student.SetIdStudent(idStudent);
+                        student.IdStudent = idStudent;
                         //adaugare student in fisier
                         adminStudenti.AddStudent(student);
 
@@ -52,11 +52,9 @@ namespace EvidentaStudenti_Consola
 
                         break;
                     case "X":
-
                         return;
                     default:
                         Console.WriteLine("Optiune inexistenta");
-
                         break;
                 }
             } while (optiune.ToUpper() != "X");
@@ -66,10 +64,11 @@ namespace EvidentaStudenti_Consola
 
         public static void AfisareStudent(Student student)
         {
-            string infoStudent = string.Format("Studentul cu id-ul #{0} are numele: {1} {2}",
-                   student.GetIdStudent(),
-                   student.GetNume() ?? " NECUNOSCUT ",
-                   student.GetPrenume() ?? " NECUNOSCUT ");
+            string infoStudent = string.Format("Studentul cu id-ul #{0} are numele: {1} {2} si notele: {3}",
+                    student.IdStudent,
+                    student.Nume ?? " NECUNOSCUT ",
+                    student.Prenume ?? " NECUNOSCUT ",
+                    string.Join(",", student.GetNote()));
 
             Console.WriteLine(infoStudent);
         }
@@ -92,6 +91,10 @@ namespace EvidentaStudenti_Consola
             string prenume = Console.ReadLine();
 
             Student student = new Student(0, nume, prenume);
+
+            Console.WriteLine("Introduceti notele");
+            string note = Console.ReadLine();
+            student.SetNote(note);
 
             return student;
         }
