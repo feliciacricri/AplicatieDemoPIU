@@ -56,6 +56,22 @@ namespace LibrarieModele
             Prenume = dateFisier[PRENUME];
             SetNote(dateFisier[NOTE], SEPARATOR_SECUNDAR_FISIER);
         }
+		
+		public float Media
+        {
+            get
+            {
+                float media = 0;
+                foreach (int nota in note)
+                {
+                    media += nota;
+                }
+
+				media = media / note.Length;
+
+                return media;
+            }
+        }
 
         public string Info()
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.IO;
 using LibrarieModele;
 using NivelStocareDate;
 
@@ -11,7 +12,12 @@ namespace EvidentaStudenti_Consola
         {
             Student student = new Student();
             string numeFisier = ConfigurationManager.AppSettings["NumeFisier"];
-            AdministrareStudenti_FisierText adminStudenti = new AdministrareStudenti_FisierText(numeFisier);
+			string locatieFisierSolutie = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            // setare locatie fisier in directorul corespunzator solutiei
+            // astfel incat datele din fisier sa poata fi utilizate si de alte proiecte
+            string caleCompletaFisier = locatieFisierSolutie + "\\" + numeFisier;
+
+            AdministrareStudenti_FisierText adminStudenti = new AdministrareStudenti_FisierText(caleCompletaFisier);
             int nrStudenti = 0;
             // acest apel ajuta la obtinerea numarului de studenti inca de la inceputul executiei
             // astfel incat o eventuala adaugare sa atribuie un IdStudent corect noului student
