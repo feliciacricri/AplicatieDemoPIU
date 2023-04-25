@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibrarieModele", "LibrarieM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NivelStocareData", "NivelStocareData\NivelStocareData.csproj", "{C00D3A72-7CEE-4781-8ACD-A61ECEC84DF5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvidentaStudenti_UI_WindowsForms", "EvidentaStudenti_UI_WindowsForms\EvidentaStudenti_UI_WindowsForms.csproj", "{2E199B0C-9469-476B-8068-E1EF266AE3F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{C00D3A72-7CEE-4781-8ACD-A61ECEC84DF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C00D3A72-7CEE-4781-8ACD-A61ECEC84DF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C00D3A72-7CEE-4781-8ACD-A61ECEC84DF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E199B0C-9469-476B-8068-E1EF266AE3F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E199B0C-9469-476B-8068-E1EF266AE3F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E199B0C-9469-476B-8068-E1EF266AE3F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E199B0C-9469-476B-8068-E1EF266AE3F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
