@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Configuration;
 using System.IO;
 using LibrarieModele;
@@ -21,7 +22,7 @@ namespace EvidentaStudenti_Consola
             int nrStudenti = 0;
             // acest apel ajuta la obtinerea numarului de studenti inca de la inceputul executiei
             // astfel incat o eventuala adaugare sa atribuie un IdStudent corect noului student
-            adminStudenti.GetStudenti(out nrStudenti);
+            adminStudenti.GetStudenti();
 
             string optiune;
             do
@@ -44,8 +45,8 @@ namespace EvidentaStudenti_Consola
 
                         break;
                     case "F":
-                        Student[] studenti = adminStudenti.GetStudenti(out nrStudenti);
-                        AfisareStudenti(studenti, nrStudenti);
+                        ArrayList studenti = adminStudenti.GetStudenti();
+                        AfisareStudenti(studenti);
 
                         break;
                     case "S":
@@ -79,12 +80,12 @@ namespace EvidentaStudenti_Consola
             Console.WriteLine(infoStudent);
         }
 
-        public static void AfisareStudenti(Student[] studenti, int nrStudenti)
+        public static void AfisareStudenti(ArrayList studenti)
         {
             Console.WriteLine("Studentii sunt:");
-            for (int contor = 0; contor < nrStudenti; contor++)
+            for (int contor = 0; contor < studenti.Count; contor++)
             {
-                AfisareStudent(studenti[contor]);
+                AfisareStudent((Student)studenti[contor]);
             }
         }
 

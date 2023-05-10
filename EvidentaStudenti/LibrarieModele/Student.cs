@@ -1,4 +1,7 @@
-﻿using System;
+﻿using LibrarieModele.Enumerari;
+using System;
+using System.Collections;
+using System.Linq;
 
 namespace LibrarieModele
 {
@@ -14,7 +17,9 @@ namespace LibrarieModele
         private const int ID = 0;
         private const int NUME = 1;
         private const int PRENUME = 2;
-        private const int NOTE = 3;
+        private const int SPECIALIZARE = 3;
+        private const int DISCIPLINE = 4;
+        private const int NOTE = 5;
 
         // data membra privata
         int[] note;
@@ -23,6 +28,17 @@ namespace LibrarieModele
         public int IdStudent { get; set; } //identificator unic student
         public string Nume { get; set; }
         public string Prenume { get; set; }
+
+        public ProgramStudiu Specializare { get; set; }
+        public ArrayList Discipline { get; set; }
+
+        public string DisciplineAsString
+        {
+            get
+            {
+                return string.Join(SEPARATOR_SECUNDAR_FISIER.ToString(), Discipline.ToArray());
+            }
+        }
 
         public int[] GetNote()
         {
@@ -55,9 +71,15 @@ namespace LibrarieModele
             Nume = dateFisier[NUME];
             Prenume = dateFisier[PRENUME];
             SetNote(dateFisier[NOTE], SEPARATOR_SECUNDAR_FISIER);
+
+            Specializare = (ProgramStudiu)Enum.Parse(typeof(ProgramStudiu), dateFisier[SPECIALIZARE]);
+            Discipline = new ArrayList();
+            //adauga mai multe elemente in lista de discipline
+            Discipline.AddRange(dateFisier[DISCIPLINE].Split(SEPARATOR_SECUNDAR_FISIER));
+
         }
-		
-		public float Media
+
+        public float Media
         {
             get
             {
@@ -91,11 +113,13 @@ namespace LibrarieModele
                 sNote = string.Join(SEPARATOR_SECUNDAR_FISIER.ToString(), note);
             }
 
-            string obiectStudentPentruFisier = string.Format("{1}{0}{2}{0}{3}{0}{4}",
+            string obiectStudentPentruFisier = string.Format("{1}{0}{2}{0}{3}{0}{4}{0}{5}{0}{6}",
                 SEPARATOR_PRINCIPAL_FISIER,
                 IdStudent.ToString(),
                 (Nume ?? " NECUNOSCUT "),
                 (Prenume ?? " NECUNOSCUT "),
+                Specializare,
+                DisciplineAsString,
                 sNote);
 
             return obiectStudentPentruFisier;

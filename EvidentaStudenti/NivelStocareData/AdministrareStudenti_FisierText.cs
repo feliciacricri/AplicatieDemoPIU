@@ -1,5 +1,5 @@
 ﻿using LibrarieModele;
-using System;
+using System.Collections;
 using System.IO;
 
 namespace NivelStocareDate
@@ -9,7 +9,6 @@ namespace NivelStocareDate
         private const int ID_PRIMUL_STUDENT = 1;
         private const int INCREMENT = 1;
 
-        private const int NR_MAX_STUDENTI = 50;
         private string numeFisier;
 
         public AdministrareStudenti_FisierText(string numeFisier)
@@ -34,28 +33,47 @@ namespace NivelStocareDate
             }
         }
 
-        public Student[] GetStudenti(out int nrStudenti)
+        public ArrayList GetStudenti()
         {
-            Student[] studenti = new Student[NR_MAX_STUDENTI];
+            ArrayList studenti = new ArrayList();
 
             // instructiunea 'using' va apela streamReader.Close()
             using (StreamReader streamReader = new StreamReader(numeFisier))
             {
                 string linieFisier;
-                nrStudenti = 0;
 
                 // citeste cate o linie si creaza un obiect de tip Student
                 // pe baza datelor din linia citita
                 while ((linieFisier = streamReader.ReadLine()) != null)
                 {
-                    studenti[nrStudenti++] = new Student(linieFisier);
+                    Student student = new Student(linieFisier);
+                    studenti.Add(student);
                 }
             }
-			
-			Array.Resize(ref studenti, nrStudenti);
 
             return studenti;
         }
+
+        public Student GetStudent(string nume, string prenume)
+        {
+            // instructiunea 'using' va apela streamReader.Close()
+            using (StreamReader streamReader = new StreamReader(numeFisier))
+            {
+                string linieFisier;
+
+                // citeste cate o linie si creaza un obiect de tip Student
+                // pe baza datelor din linia citita
+                while ((linieFisier = streamReader.ReadLine()) != null)
+                {
+                    Student student = new Student(linieFisier);
+                    if (student.Nume.Equals(nume) && student.Prenume.Equals(prenume))
+                        return student;
+                }
+            }
+
+            return null;
+        }
+
         private int GetId()
         {
             int IdStudent = ID_PRIMUL_STUDENT;
