@@ -3,6 +3,7 @@ using LibrarieModele.Enumerari;
 using NivelStocareDate;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Drawing;
 using System.IO;
@@ -12,7 +13,7 @@ namespace EvidentaStudenti_UI_WindowsForms
 {
     public partial class Form1 : Form
     {
-        AdministrareStudenti_FisierText adminStudenti;
+        IStocareData adminStudenti;
 
         private Label lblHeaderNume;
         private Label lblHeaderPrenume;
@@ -25,21 +26,18 @@ namespace EvidentaStudenti_UI_WindowsForms
         private const int LATIME_CONTROL = 100;
         private const int DIMENSIUNE_PAS_Y = 30;
         private const int DIMENSIUNE_PAS_X = 120;
-	    private const int OFFSET_X = 600;
+        private const int OFFSET_X = 600;
 
         ArrayList disciplineSelectate = new ArrayList();
 
         public Form1()
         {
-            string numeFisier = ConfigurationManager.AppSettings["NumeFisier"];
-            string locatieFisierSolutie = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName;
-            string caleCompletaFisier = locatieFisierSolutie + "\\" + numeFisier;
-            adminStudenti = new AdministrareStudenti_FisierText(caleCompletaFisier);
+            
+            adminStudenti = StocareFactory.GetAdministratorStocare();
 
             InitializeComponent();
-            
+
             //setare proprietati
-            this.Size = new Size(500, 600);
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(100, 100);
             this.Font = new Font("Arial", 9, FontStyle.Bold);
@@ -49,10 +47,12 @@ namespace EvidentaStudenti_UI_WindowsForms
         
         private void Form1_Load(object sender, EventArgs e)
         {
-            AfiseazaStudenti();
+            List<Student> studenti = adminStudenti.GetStudenti();
+            
+            AfiseazaStudenti(studenti);
         }
 
-        private void AfiseazaStudenti()
+        private void AfiseazaStudenti(List<Student> studenti)
         {
             //adaugare control de tip Label pentru 'Nume';
             lblHeaderNume = new Label();
@@ -77,8 +77,6 @@ namespace EvidentaStudenti_UI_WindowsForms
             lblHeaderNote.Left = OFFSET_X + 2 * DIMENSIUNE_PAS_X;
             lblHeaderNote.ForeColor = Color.DarkGreen;
             this.Controls.Add(lblHeaderNote);
-
-            ArrayList studenti = adminStudenti.GetStudenti();
 
             int nrStudenti = studenti.Count;
             lblsNume = new Label[nrStudenti];
@@ -200,8 +198,39 @@ namespace EvidentaStudenti_UI_WindowsForms
 
         private void BtnAfiseaza_Click(object sender, EventArgs e)
         {
-            AfiseazaStudenti();
-            this.Width = 1000;
+            List<Student> studenti = adminStudenti.GetStudenti();
+            AfiseazaStudenti(studenti);
+            AfisareStudentiInControlListbox(studenti);
+            AfisareStudentiInControlDataGridView(studenti);
+        }
+
+        private void AfisareStudentiInControlListbox(List<Student> studenti)
+        {
+            lstAfisare.Items.Clear();
+            foreach (Student student in studenti)
+            {
+                //pentru a adauga un obiect de tip Student in colectia de Items a unui control de tip ListBox, 
+                // clasa Student trebuie sa implementeze metoda ToString() specificand cuvantul cheie 'override' in definitie
+                //pentru a arata ca metoda ToString a clasei de baza (Object) este suprascrisa
+                lstAfisare.Items.Add(student);
+
+                //personalizare sursa de date
+                //lstAfisare.Items.Add(s.NumeComplet);
+            }
+        }
+
+        private void AfisareStudentiInControlDataGridView(List<Student> studenti)
+        {
+            //reset continut control DataGridView
+            dataGridStudenti.DataSource = null;
+
+            //!!!! Controlul de tip DataGridView are ca sursa de date lista de obiecte de tip Student !!!
+            dataGridStudenti.DataSource = studenti;
+
+            // personalizare sursa de date
+            // dataGridStudenti.DataSource = studenti.Select(s => new { s.Id, s.Nume, s.Prenume, 
+            // s.Specializare, Discipline = string.Join(",", s.Discipline), 
+            // Note = string.Join(",", s.GetNote()) } ).ToList();
         }
     }
 }

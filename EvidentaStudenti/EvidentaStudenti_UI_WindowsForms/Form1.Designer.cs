@@ -47,8 +47,11 @@
             this.lblNote = new System.Windows.Forms.Label();
             this.lblPrenume = new System.Windows.Forms.Label();
             this.lblNume = new System.Windows.Forms.Label();
+            this.lstAfisare = new System.Windows.Forms.ListBox();
+            this.dataGridStudenti = new System.Windows.Forms.DataGridView();
             this.gpbDiscipline.SuspendLayout();
             this.gpbProgrameStudiu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridStudenti)).BeginInit();
             this.SuspendLayout();
             // 
             // gpbDiscipline
@@ -250,11 +253,32 @@
             this.lblNume.TabIndex = 27;
             this.lblNume.Text = "Nume";
             // 
+            // lstAfisare
+            // 
+            this.lstAfisare.FormattingEnabled = true;
+            this.lstAfisare.ItemHeight = 17;
+            this.lstAfisare.Location = new System.Drawing.Point(629, 275);
+            this.lstAfisare.Name = "lstAfisare";
+            this.lstAfisare.Size = new System.Drawing.Size(527, 106);
+            this.lstAfisare.TabIndex = 42;
+            // 
+            // dataGridStudenti
+            // 
+            this.dataGridStudenti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridStudenti.Location = new System.Drawing.Point(629, 458);
+            this.dataGridStudenti.Name = "dataGridStudenti";
+            this.dataGridStudenti.RowHeadersWidth = 51;
+            this.dataGridStudenti.RowTemplate.Height = 24;
+            this.dataGridStudenti.Size = new System.Drawing.Size(527, 150);
+            this.dataGridStudenti.TabIndex = 43;
+            // 
             // FormularStudent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1008, 672);
+            this.ClientSize = new System.Drawing.Size(1296, 672);
+            this.Controls.Add(this.dataGridStudenti);
+            this.Controls.Add(this.lstAfisare);
             this.Controls.Add(this.gpbDiscipline);
             this.Controls.Add(this.lblDiscipline);
             this.Controls.Add(this.gpbProgrameStudiu);
@@ -278,6 +302,7 @@
             this.gpbDiscipline.PerformLayout();
             this.gpbProgrameStudiu.ResumeLayout(false);
             this.gpbProgrameStudiu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridStudenti)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -304,6 +329,8 @@
         private System.Windows.Forms.Label lblNote;
         private System.Windows.Forms.Label lblPrenume;
         private System.Windows.Forms.Label lblNume;
+        private System.Windows.Forms.ListBox lstAfisare;
+        private System.Windows.Forms.DataGridView dataGridStudenti;
     }
 }
 

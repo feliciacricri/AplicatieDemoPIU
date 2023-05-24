@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace LibrarieModele
 {
+    [Serializable]
     public class Student
     {
         //constante
@@ -147,6 +148,11 @@ namespace LibrarieModele
         {
             note = new int[_note.Length];
             _note.CopyTo(note, 0);
+        }
+
+        public override string ToString()
+        {
+            return ConversieLaSir_PentruFisier();
         }
 
         private bool ValideazaNota(int nota)

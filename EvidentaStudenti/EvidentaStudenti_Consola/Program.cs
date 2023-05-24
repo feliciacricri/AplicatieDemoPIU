@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using LibrarieModele;
@@ -45,7 +46,7 @@ namespace EvidentaStudenti_Consola
 
                         break;
                     case "F":
-                        ArrayList studenti = adminStudenti.GetStudenti();
+                        List<Student> studenti = adminStudenti.GetStudenti();
                         AfisareStudenti(studenti);
 
                         break;
@@ -80,12 +81,12 @@ namespace EvidentaStudenti_Consola
             Console.WriteLine(infoStudent);
         }
 
-        public static void AfisareStudenti(ArrayList studenti)
+        public static void AfisareStudenti(List<Student> studenti)
         {
             Console.WriteLine("Studentii sunt:");
             for (int contor = 0; contor < studenti.Count; contor++)
             {
-                AfisareStudent((Student)studenti[contor]);
+                AfisareStudent(studenti[contor]);
             }
         }
 

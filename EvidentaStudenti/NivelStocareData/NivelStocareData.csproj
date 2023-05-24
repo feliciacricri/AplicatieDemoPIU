@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdministrareStudenti_FisierBinar.cs" />
     <Compile Include="AdministrareStudenti_FisierText.cs" />
+    <Compile Include="IStocareData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
